@@ -47,8 +47,13 @@ def paragraphedPageContent( content ):
 
 def renderWithDefaults( request, context ):
     form = ContactForm()
-    aboutMePage = Page.objects.get(slug='hidden-about-me')
-    newContext = dict( [( 'contactform', form ), ( 'aboutMe', paragraphedPageContent( aboutMePage.content ) ) ] + context.items() )
+    try:
+        aboutMePage = Page.objects.get(slug='hidden-about-me')
+        aboutMe = paragraphedPageContent( aboutMePage.content )
+    except:
+        aboutMe = 'Nothing to see here'
+        
+    newContext = dict( [( 'contactform', form ), ( 'aboutMe', aboutMe ) ] + context.items() )
     
     return render( request, 'simple/page.html', newContext ) 
 
