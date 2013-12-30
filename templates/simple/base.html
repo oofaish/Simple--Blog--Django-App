@@ -1,0 +1,148 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="Personal Website of Ali Cigari, Web and Mobile Developer">
+        <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalable=0">
+        <link href="{%static 'simple/js/vendor/kudos/kudos.css'%}" media="screen" rel="stylesheet" type="text/css" />
+
+        <link rel="stylesheet" href="{% static 'simple/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'simple/css/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'simple/css/animate.min.css' %}">
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'simple/css/font-awesome/css/font-awesome.min.css' %}">        
+        <link rel="stylesheet" href="{% static 'simple/css/main.css' %}">
+        {% block extrastyle %}{% endblock %}
+        <script src="{% static 'simple/js/vendor/modernizr-2.7.1.min.js'%}"></script>
+        
+        {% block extrahead %}{% endblock %}
+        {% block blockbots %}<meta name="robots" content="index, follow">{% endblock %}
+
+    </head>
+        <!--[if lt IE 8]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <body class="mainColor">
+            <header class="pageWidth">
+                            {% block headerIcons %}{% endblock %}
+            <div class="headerImageWrapper pageWidth">
+            <img class="headerImage pageWidth" src="{%static 'simple/img/headerAdjustedLarge.jpg'%}" alt="Ali Rowing">
+            <div class="headerImageCover pageWidth"></div>
+            </div>
+            <a class="jaxify" href="/"><h1 class="headerButton mainColorBackground"><span id="oof" class="mainColor">ali</span><span id="aish" class="">cigari</span></h1></a>
+            <nav class="wideNav">
+                <ul class='NavigationUL firstNav'>
+                    <li class="NavigationLI"><a class="mainColorBackground headerButton jaxify" href="/blog/">Blog</a></li>
+                    <li class="NavigationLI"><a class="mainColorBackground headerButton jaxify" href="/portfolio/">Portfolio</a></li>
+                    <li class="NavigationLI respectHover"><a href="#" class="mainColorBackground headerButton">Stuff</a>
+                        <ul class="secondNav">
+                            <li><a href="/ideas/" class="mainColorBackground headerButton jaxify">ideas</a></li>
+                            <li><a href="/qpscroll/" class="mainColorBackground headerButton jaxify">qpScroll</a></li>
+                            <li><a href="/countdown/" class="mainColorBackground headerButton jaxify">countdownCube</a></li>
+                            <li><a href="/stuffilike/" class="mainColorBackground headerButton jaxify">stuff I like</a></li>
+                        </ul>
+                    </li>
+                    <li class="NavigationLI"><a class="mainColorBackground headerButton jaxify" href="/sports/">sports</a></li>
+                    <li class="NavigationLI"><a class="mainColorBackground headerButton contactButton">Contact</a></li>                    
+                </ul>
+            </nav>
+        </header>
+        <!-- Add your site or application content here -->
+        <article class="pageWidth clearBackground">
+            <h1 class="pageTitle">{% block header %}{% endblock %}</h1>
+            <div class="kudosDiv"></div>
+            <div class="pageContent">
+            {% block content %}
+            {% endblock %}           
+
+            </div> 
+            <div class="shareWrapper"></div>
+            <div class="AlertBox alert-success">
+                <span></span>
+                <a class="close" href="#" onclick="closeAlertBox()"><i class="fa fa-times-circle-o fa-1x"></i></a>
+            </div>
+        </article>
+<footer class="pageWidth">
+            {% block footer %}
+            {% endblock %}
+
+    
+    <div class="aboutMe clearBackground footerDiv">
+        <h3>Aboue Me</h3>
+        {{aboutMe | safe}}
+    </div>
+    
+    <div class="footerDiv clearBackground contactFormDiv">
+        <h3 class="formMessage">Send Me A Wink<img class="formBusy" style="display:none" src="{%static 'simple/img/smallLoader.gif' %}"></h3>
+        <form class="contactForm" action="/submitContactForm" method="post">{% csrf_token %}
+            {{ contactform.as_p }}
+            <div class="clearfix"></div>
+            <label></label>
+            <input class="submitButton input" type="submit" value="Send" />
+            <div class="clearfix"></div>
+        </form>
+        
+    </div>
+    <div class="footerDiv clearBackground socialLinks">
+        <h3>Find Me Doing My Thing</h3>
+        <ul>
+        <li><a href="http://twitter.com/oofaish"><i class="mainColor socialIcon fa fa-twitter fa-2x"></i></a></li> 
+        <li><a href="https://github.com/oofaish"><i class="mainColor socialIcon fa fa-github fa-2x"></i></a></li>
+        <li><a href="http://www.linkedin.com/in/alicigari"><i class="mainColor socialIcon fa fa-linkedin fa-2x"></i></a></li>
+        <li><a href="http://facebook.com/ali.cigari"><i class="mainColor socialIcon fa fa-facebook fa-2x"></i></a></li>
+        </ul>
+        <ul>
+        <li><a href="http://www.youtube.com/user/almacen2002"><i class="mainColor socialIcon fa fa-youtube fa-2x"></i></a></li>
+        <li><a href="http://instagram.com/oofaish/"><i class="mainColor socialIcon fa fa-instagram fa-2x"></i></a></li>
+        <li><a href="http://pinterest.com/alicigari/"><i class="mainColor socialIcon fa fa-pinterest fa-2x"></i></a></li>
+        <li><a href="http://www.last.fm/user/oofaish"><i class="mainColor socialIcon fa fa-music fa-2x"></i></a></li>
+        </ul>
+    </div>
+</footer>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="{%static 'simple/js/vendor/qpscroll.js'%}"></script>
+        <script type="text/javascript" src="{%static 'simple/js/vendor/kudos/jquery.cookie.js'%}"></script>
+        <script type="text/javascript" src="{%static 'simple/js/vendor/kudos/kudos.js'%}"></script>
+        <script type="text/javascript" src="{%static 'simple/js/vendor/share/jquery.sharrre.js'%}"></script>
+        
+        <script src="{%static 'simple/js/plugins.js'%}"></script>
+        <script src="{%static 'simple/js/main.js'%}"></script>
+        <script src="{%static 'simple/js/jaxify.js'%}"></script>
+        {% block extrascripts %}{% endblock %}
+        <script>
+            $(document).ready(function(){
+                
+                //getPageData( "/{{extra}}/", true );
+            	if( window.innerWidth > 600 )
+	                $('body').qpScroll({
+	                    imagesFolder: "{% static 'simple/img/parallax/' %}",
+	                    imagesArray: [ "a1.jpg", "a2.jpg" ],
+	                    firstSpeed: 10,
+	                    neighbourRatio: 1.02,
+	                    });                    
+            });
+            
+            {% block finalScript %}{% endblock %}
+       </script>
+       <script type="text/javascript">
+
+       var _gaq = _gaq || [];
+       _gaq.push(['_setAccount', 'UA-33071862-1']);
+       _gaq.push(['_setDomainName', '.cigari.co.uk']);
+       _gaq.push(['_trackPageview']);
+
+       (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+       })();
+       $.fn.jaxify.share(window.location.href, document.title );
+     </script>
+     
+    </body>
+</html>

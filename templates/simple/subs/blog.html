@@ -1,0 +1,6 @@
+{{pageContent | safe }}
+    <ul>
+    {% for post in posts %}
+        <li><a class='jaxify' href="{% url 'simple:blogPostView' page.slug post.created.year post.slug %}">{{post.title}}</a>,<span class="smallItalicText">posted {{post.created}}<span></li>
+    {% endfor %}
+    </ul>

@@ -1,0 +1,928 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+  
+      /****************
+    **Navigation Row setup
+    **
+    ****************/
+    
+    nav
+    {
+        margin-top: 7px;
+    }
+
+    .wideNav
+    {
+    margin-left: 200px;
+    }
+    
+    nav ul
+    {
+    position: relative;
+    }
+    
+    
+    nav > ul > li
+    {
+        display: inline-block;
+        *display: inline;
+    }
+    
+    nav a
+    {
+        display: block;
+    }
+    
+    nav li
+    {
+    padding: 0px 0px;
+    margin: 0px 2px;
+    position: relative;
+    }
+        
+    .secondNav li {
+
+    /*height: 50px;*/
+    margin: 0 auto;
+    position: relative;
+    }
+      
+    .secondNav
+    {
+    position: absolute;
+    display: none;
+    width: 8.8em;
+    z-index: 300;
+    left: 0;
+    right: 0;
+    }
+    
+    .wideNav ul li.respectHover:hover > ul {
+        display: block;
+    }
+    
+    /********
+     * NAV
+     */
+    html{
+        background: black;
+    }
+  .qpScroll
+  {
+      opacity: 0.7;
+  }
+  
+@font-face {
+    font-family: bri;
+    src: url('fonts/bri.ttf');
+}
+
+*
+{
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.mainColorBackground
+{
+    background-color: #E3B74F;
+    color: black;
+}
+
+.mainColor
+{
+    color: #E3B74F;
+}
+
+body
+{
+    font-family: 'Droid Serif', serif;
+}
+
+.pageWidth
+{
+    max-width: 1000px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.clearBackground
+{
+    background-color: black;
+    background-color: rgba( 20, 20, 20, 0.9 );
+    
+}
+
+.headerImage
+{
+    width: 100%;
+    min-width: 1000px; 
+    position: absolute;
+    top: 10px;
+    z-index: 2;
+    opacity: 1;
+}
+
+.headerImageCover
+{
+    position: absolute;
+    height: 312px;
+    width: 100%;
+    top: 10px;
+    background-color: black;
+    z-index: 1;
+}
+
+article ul
+{
+	list-style: inside circle;
+}
+
+header h1, .firstNav>li>a, .secondNav
+{
+    box-shadow: 0 0 5px black;    
+}
+
+.headerButton
+{
+    transition: color 0.5s, border-color 0.5s, background-color 0.5s;
+    z-index: 20;
+}
+
+.headerButton:hover, .headerButton:focus 
+{
+    background-color: #ED3758;
+}
+
+.headerButton:hover #oof
+{
+    color: #ED3758;
+}
+
+header a
+{
+    text-decoration: none;
+
+}
+header
+{
+    /*height: 322px;*/
+    /*padding-bottom: 10px;*/
+    position: relative;
+    margin-bottom: 20px;
+    /*margin-top: 200px;*/
+}
+
+.headerImageWrapper
+{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	display: block;
+	height: 322px;
+}
+
+nav
+{
+    position: absolute;
+    bottom: 10px;
+    left: 70px;   
+    z-index: 20;
+}
+
+.NavigationUL
+{
+    list-style: none;
+}
+
+.NavigationLI
+{
+    font-size: 2em;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.headerButton:before
+{
+    content: '#';
+}
+
+nav .headerButton
+{
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+header h1
+{
+    font-size: 3em;
+    margin: 0 20px 0 20px;
+    /*float: left;*/
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    /*font-family: 'bri';*/ 
+    padding-right: 10px;
+}
+
+#oof {
+    border-radius: 5px;
+    background-color: black;
+    transition: color 0.5s, border-color 0.5s;
+}
+
+
+#aish {
+    padding-left: 0;
+    border-radius: 0;
+    color: black;
+}
+
+footer
+{
+    font-size: 0.9rem;
+    display: block;
+    text-align: center;
+}
+
+.footerDiv
+{
+    padding: 10px 5px 10px 5px;
+    float: left;
+    width: 33%;
+    min-height: 375px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.footerDiv:nth-child(2n)
+{
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+}
+
+.socialIcon
+{
+    border-radius: 23px;
+    width: 46px;
+    height: 46px;
+    border: 1px solid #E3B74F;
+    padding-top: 9px;
+    transition: color 0.5s, border-color 0.5s;
+}
+
+.socialLinks li
+{
+    list-style: none;
+    margin-top: 0px;
+    display: inline-block;
+}
+
+.socialLinks ul
+{
+    margin: 10px auto 10px auto;
+    max-width: 290px;
+
+}
+
+.socialIcon:hover,.socialIcon:focus
+{
+    color: #ED3758;
+    border-color: #ED3758;
+    
+}
+
+.highlightBorder:not(.disabled)
+{
+    border-color: #ED3758 !important;
+}
+
+.highlightColor:not(.disabled)
+{
+    color: #ED3758 !important;
+}
+
+
+article
+{
+    padding: 10px;
+    min-height: 200px;
+}
+
+.aboutMe img
+{
+	width: 150px;
+	border-radius: 75px;
+	/*float: right;*/
+	box-shadow: 0 0 2px black;
+	margin-bottom: 5px;
+}
+
+.aboutMe p
+{
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+article a:visited, article a
+{
+    color: #ED3758;
+}
+
+.smallItalicText
+{
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+article p
+{
+	text-align: justify;
+}
+
+article p, article img, article ul, article h1, article h2 
+{
+  	margin-bottom: 10px;
+}
+
+article h2
+{
+	font-size: 1.5em;
+}
+article h1
+{
+	font-size: 2em;
+	font-weight: 700;
+}
+
+
+article h1, article h2
+{
+	border-bottom: 2px solid #E3B74F;
+}
+
+article h2, article h3, article h4, article h5, article h6
+{
+	display: inline-block;
+	font-weight: 700;
+}
+
+article strong
+{
+	font-weight: 700
+}
+
+article em
+{
+	font-style: italic;
+}
+
+.AlertBox
+{
+    max-width: 900px;
+    font-size: 0.8em;
+    margin: 0px auto 30px auto;
+    padding: 10px;
+    position: fixed;
+    bottom: 30px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+    opacity: 0.95;
+    display: none;
+    background-color: pink;
+    border-radius: 10px;
+    color: black;
+}
+
+
+.AlertBox.alert-danger
+{
+    background-color: pink;
+}
+
+.AlertBox.alert-success
+{
+    background-color: #7DC276;
+}
+
+.AlertBox.alert-danger a
+{
+    color: red;
+}
+
+.AlertBox.alert-success a
+{
+    color: green;
+    color: #187310;
+}
+
+
+@media only screen and (max-width: 980px)  and (min-width:600px) {
+ header
+ {
+     font-size: 0.85em;
+ }    
+ 
+ nav
+ {
+     left: 40px;
+ }
+ .headerImage
+ {
+	 left: -200px;
+ }
+
+ 
+}
+
+@media only screen and (max-width: 600px) {
+
+.clearBackground
+{
+    background-color: black;
+    background-color: rgba( 20, 20, 20, 0.9 );
+}
+
+	
+body
+{
+	background-image: url(http://static.cigari.co.uk/images/old_mathematics/old_mathematics.png);
+	background-attachment: fixed;
+
+}
+	
+ header
+ {
+     font-size: 0.6em;
+ }    
+ 
+ .headerImage
+ {
+	 left: -400px;
+ }
+ 
+ .headerImageWrapper
+ {
+	 height: 250px;
+ }
+ 
+nav
+{
+    left: 10px;
+	bottom: 5px;
+ 	font-size: 0.95em; 
+}
+ 
+ .secondNav
+ {
+	 left: -100px;
+ }
+ 
+ article h1
+ {
+	 font-size: 1.3em !important;
+ }
+ 
+ article h2
+ {
+	 font-size: 1.1em;
+ }
+ 
+ .footerDiv
+ {
+     float: none;
+     width: 90%;
+     margin: 10px auto !important;
+     min-height: 0;
+     
+ }
+ 
+}
+    
+/**********
+ * contact form
+ **********/
+
+.footerDiv h3
+{
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.contactForm label
+{
+    width: 23%;
+    margin-top: 5px;
+    float: left;
+    margin-right: 5px;
+    text-align: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.contactForm .input
+{
+    margin-top: 5px;
+    float: left;
+    width: 70%;
+    background: rgba(20,20,20,0.7);
+    color: #E3B74F;
+    padding: 5px;
+    outline: 0;
+    box-shadow: none;
+    border: 2px solid #E3B74F;
+}
+/*
+.contactForm label
+{
+    text-align: left;
+}
+
+.contactForm p
+{
+	text-align: right;
+	padding-top: 10px;
+}
+
+.contactForm .input
+{
+	width: 200px;
+    background: rgba(20,20,20,0.5);
+    color: #E3B74F;
+    outline: 0;
+    box-shadow: none;
+	/*text-align: left;*/
+    border: 2px solid #E3B74F;
+}
+*/
+.contactForm .input:hover
+{   
+    box-shadow: 0 0 3px 1px #E3B74F;
+}
+
+.contactForm .input:active, .contactForm .input:focus
+{
+    box-shadow: 0 0 3px 1px #ED3758;
+    color: #ED3758;
+    border: 2px solid #ED3758;
+}
+
+.contactForm .submitButton
+{
+    /*
+    float: right;
+    text-align: center;
+    margin: 0 auto;*/
+}
+    
+.contactForm .submitButton.busy
+{
+    color: gray;
+}
+
+.contactForm
+{
+    font-size: 1em;
+}   
+
+.contactForm .input.disabled
+{
+    color: gray;
+    border-color: gray;
+    box-shadow: none;
+}
+
+
+/*
+ * 
+ * Extra bits
+ */
+.shareWrapper
+{
+	margin-top: 10px;
+	font-size: 0.9em;
+	font-style: italic;
+	display: inline-block;
+}
+.shareWrapper .buttons
+{
+	display: inline-block;
+	margin-top: 10px;
+	padding-top: 5px;
+	border-radius: 5px;
+	background-color: rgba( 10, 10, 10, 0.7 );
+	box-shadow: 0 0 2px black;
+}
+.shareWrapper .button
+{
+	display: inline-block;
+	margin: 5px;
+}
+
+article iframe, article img
+{
+	max-width: 100%;
+}
+
+.shareWrapper a
+{
+	text-decoration: none;
+}
+
+.medium
+{
+	max-width: 400px;
+
+}
+
+.small
+{
+	max-width: 200px;
+}
+
+.circle
+{
+	border-radius: 50%;
+}
+
+article img
+{
+	box-shadow: 0 0 5px gray;
+	margin: 5px;
+}
+
+
+.left
+{
+	float: left;
+}
+
+.right
+{
+	float: right;
+}
+
+.center
+{
+	margin-left: auto;
+	margin-right: auto;
+	display: block;	
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

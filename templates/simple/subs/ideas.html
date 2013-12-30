@@ -1,0 +1,6 @@
+{{pageContent | safe}}
+    <ul>
+    {% for post in posts %}
+        <li><a class='jaxify' href="{% url 'simple:ideaView' page.slug post.slug %}">{{post.title}}</a></li>
+    {% endfor %}
+    </ul>

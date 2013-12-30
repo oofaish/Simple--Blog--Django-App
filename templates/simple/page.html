@@ -1,0 +1,30 @@
+{% extends "simple/base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{page.longTitle}}{% endblock %}
+{% block extrastyle %}
+{% for stylesheet in page.stylesheets.all %}
+    <link rel="stylesheet" href="{{stylesheet.url}}">
+{% endfor %}
+    <style class="inlinestyle">{{page.inlinestyle}}</style>
+{% endblock %}
+{% block header %}
+{{page.title}}
+{% endblock %}
+{% block content %}
+{{htmlContent | safe}}
+{% endblock %}
+{% block extrascripts %}
+{% for script in page.scripts.all %}
+    <script src="{{script.url}}"></script>
+{% endfor %}
+<script class="inlinescript">{{page.inlinescript}}</script>
+{% endblock %}
+{% block finalScript %}
+    {% if page.showKudos %}
+    $(document).ready( function(){
+        setupKudos( "{{page.id}}", {{page.kudos}} );
+
+    }); 
+    {% endif %}
+{% endblock %}

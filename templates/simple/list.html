@@ -1,0 +1,11 @@
+{% extends "simple/page.html" %}
+{% block content %}
+{{htmlContent}}
+    <ul>
+    {% for post in posts %}
+        <li><a class='jaxify' href="{% url 'simple:blogPostView' page.slug post.slug %}">{{post.title}}</a></li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}
