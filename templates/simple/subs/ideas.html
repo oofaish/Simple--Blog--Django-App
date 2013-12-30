@@ -1,6 +1,6 @@
 {{pageContent | safe }}
     <ul>
     {% for post in posts %}
-        <li><a class='jaxify' href="{% url 'simple:ideaView' page.created.year post.slug %}">{{post.title}}</a>,<span class="smallItalicText">posted {{post.created}}<span></li>
+        <li><a class='jaxify' href="{% url 'simple:ideaView' 'ideas' post.created.year post.slug %}">{{post.title}}</a>,<span class="smallItalicText">posted {{post.created}}<span></li>
     {% endfor %}
     </ul>
