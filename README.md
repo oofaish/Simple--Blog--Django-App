@@ -1,7 +1,7 @@
 Simple--Blog--Django-App
 ========================
 
-My personal website written in Django.
+My personal website written in Django. Currently living in http://dev.cigari.co.uk, but soon will move to http://cigari.co.uk. 
 
 - Ajaxified/History API: page contents are loaded via ajax and pushed onto the browser history stack. I decided to write my own rather than use the heavier ajaxify plugin. (I only load page content, new scripts, etc, rather than the whole page)
 - animate.css: fnacy css animation to show off when a new page loads, or to point how people can contact me
