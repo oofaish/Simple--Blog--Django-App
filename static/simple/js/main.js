@@ -54,7 +54,6 @@ lastError = {};
 $form.click( function(){
     if( shouldActuallySubmit )
     {
-        console.log( 'am I here?');
             $( '.contactForm .input' ).each( function( index, element){
                 this.setCustomValidity( '');
             });
@@ -157,22 +156,31 @@ function highlight( $div, endFunction, animationString, updateColor )
         $allElements.addClass('highlightColor highlightBorder' );
     $div.addClass( animationString );
     $div.one('mozAnimationEnd webkitAnimationEnd oAnimationEnd animationend animationEnd', function(){
-    	console.log( 'ye hi')
         $(this).removeClass( animationString );
         if( updateColor )
             $allElements.removeClass('highlightColor highlightBorder' );
         endFunction();
-        console.log( 'ye hi' );
     });
 
 }
 
 $(document).ready(function(){
    $headerImage = $( '.headerImage' );
+   $headerImageInnerWrapper = $( '.headerImageInnerWrapper' );
+   $headerImageWrapper = $('.headerImageWrapper');
+   hICHeight = $headerImageWrapper.height();
+   gap = 0;
+   isNoTouch = $('html').hasClass('no-touch');
     $( window ).scroll(function() {
         var yPos = $( this ).scrollTop();
-        opacity = 1- Math.min( 1, Math.max( yPos / 250, 0 ) )  
+        opacity = 1- Math.min( 1, Math.max( yPos / 200, 0 ) )  
         $headerImage.css('opacity', opacity );
+        if( isNoTouch )
+        {
+        	newHeight = Math.max( 0, hICHeight - yPos + gap );
+        	$headerImageInnerWrapper.css('height', newHeight );
+        }
+        
     });
     
     $('.contactButton').click( function(){
@@ -185,7 +193,19 @@ $(document).ready(function(){
     }); 
     
     $.fn.jaxify.jaxifyPage();
-  
     
-});     
-
+    var displaySecondNav = function( that )
+    {
+    	$ul = $( that ).find( 'ul');
+    	if( $ul.css('display') == 'block' )
+    		$ul.css('display', 'none');
+    	else
+    		$ul.css('display', 'block');
+    }
+    
+	//because iOS sucks and doesnt quiet respect the CSS3 hover property:
+    $('.touch .wideNav ul li.respectHover').click( function( e ){
+    	e.preventDefault();
+    	displaySecondNav( this );
+    } );  
+});

@@ -1,5 +1,11 @@
 {{pageContent | safe }}
-
 <br>
 <p class="smallItalicText">Posted on {{page.created}}</p>
+<p class="postTags">posted under:
+{% if page.tags.all|length == 0 %}
+	<span class="postTag">untagged</span>
+{% else %}
+	{% for tag in page.tags.all %}<span class="postTag">{{tag.name}}</span>{% endfor %}
+{% endif %}
+</p>
 <a class='jaxify' href="{% url 'simple:blogView' 'blog' %}"><i class="fa fa-arrow-circle-left fa-1x"></i> back to Blog</a>

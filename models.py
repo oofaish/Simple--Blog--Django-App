@@ -30,6 +30,12 @@ class Tag( models.Model ):
     def __unicode__(self):
         return self.name
 
+class ThingTag( models.Model ):
+    name = models.CharField( max_length=100 ) 
+    
+    def __unicode__(self):
+        return self.name
+
 class Image( models.Model ):
     title = models.CharField( max_length=100 )
     link  = models.CharField( max_length=200 )
@@ -37,7 +43,22 @@ class Image( models.Model ):
 
     def __unicode__(self):
         return self.title
+
+class Thing( models.Model ):
+    title       = models.CharField(max_length=200)
+    description = models.TextField()
+    tags        = models.ManyToManyField(ThingTag, blank=True )
+    created     = models.DateTimeField(default=datetime.now())
+    updated     = models.DateTimeField(auto_now=True)
+    reads       = models.PositiveIntegerField(default=0)
+    link        = models.URLField(blank=True)
+    image       = models.URLField(blank=True)
+    video       = models.URLField(blank=True)
+    status      = models.PositiveSmallIntegerField(default=1)#0 means dont show it, 1 means show it
     
+    def __unicode__(self):
+        return self.title
+        
 class Page( models.Model ):
     title         = models.CharField(max_length=200)
     slug          = models.CharField(max_length=30)
@@ -92,4 +113,8 @@ class Page( models.Model ):
     @property
     def longTitle(self):
         return 'Ali Cigari - Web and Mobile Developer - ' + self.title
+
+    @property
+    def summary(self):
+        return self.content[0:min(100,len(self.content))]
     

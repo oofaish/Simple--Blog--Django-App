@@ -6,7 +6,7 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.views.generic import ListView
-from simple.models import Page, Category
+from simple.models import Page, Category, Thing, ThingTag
 from django.template import loader, Context
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
@@ -14,6 +14,7 @@ from django.conf import settings
 import re
 import json
 from django.db.models import Q
+import markdown
 
 class ContactForm( forms.Form ):
     defaultAttr = [ ( 'required', '' ), ( 'class', 'input' ) ]
@@ -29,6 +30,7 @@ def ensurePermission( page, request ):
     page.updateReads( request )
 
 def paragraphedPageContent( content ):
+    """
     paras = re.split(r'[\r\n]+', content)
     newParas = []
     
@@ -44,6 +46,8 @@ def paragraphedPageContent( content ):
             newParas.append(p.strip() )
     
     return '\n'.join(newParas)
+    """
+    return markdown.markdown( content )
 
 def renderWithDefaults( request, context ):
     form = ContactForm()
@@ -52,9 +56,8 @@ def renderWithDefaults( request, context ):
         aboutMe = paragraphedPageContent( aboutMePage.content )
     except:
         aboutMe = 'Nothing to see here'
-        
+            
     newContext = dict( [( 'contactform', form ), ( 'aboutMe', aboutMe ) ] + context.items() )
-    
     return render( request, 'simple/page.html', newContext ) 
 
 
@@ -95,7 +98,7 @@ def listViewStuff( category, json, request ):
     ensureList( category )
     page = Page.objects.get(slug=category)
     ensurePermission( page, request )
-    posts = Page.objects.filter( categories__name=page.categories.all()[ 0 ].subCategoryName ).order_by( '-created' )
+    posts = Page.objects.filter(status=1,categories__name=page.categories.all()[ 0 ].subCategoryName ).order_by( '-created' )
     
     if json:
         returnDic = page.pageDict()
@@ -115,6 +118,33 @@ def listView( request, category ):
 def listViewJson( request, category ):
     returnDic = listViewStuff( category, True, request )
     return HttpResponse( json.dumps( returnDic , cls=DjangoJSONEncoder), content_type = 'application/json' )
+
+def stuffILikeStuff( category, json, request ):
+    page = Page.objects.get(slug=category)
+    ensurePermission( page, request )
+    things = Thing.objects.filter(status=1).order_by( '-created' )
+    
+    if json:
+        returnDic = page.pageDict()
+    else:
+        returnDic = {'page':page}
+
+    templateName = 'simple/subs/' + category + '.html'
+    pageContent = paragraphedPageContent( page.content );
+    returnDic[ 'htmlContent' ] = loader.render_to_string( templateName, { 'page': page, 'pageContent':pageContent, 'things': things} )
+
+    return returnDic
+
+def stuffILikeView( request, category ):
+    context = stuffILikeStuff( category, False, request )    
+    return renderWithDefaults( request, context )
+    
+def stuffILikeViewJson( request, category ):
+    returnDic = stuffILikeStuff( category, True, request )
+    return HttpResponse( json.dumps( returnDic , cls=DjangoJSONEncoder), content_type = 'application/json' )
+
+
+
 
 def staticViewInstance( request, slug ):
     try:

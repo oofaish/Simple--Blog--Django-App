@@ -18,7 +18,7 @@
 {% for script in page.scripts.all %}
     <script src="{{script.url}}"></script>
 {% endfor %}
-<script class="inlinescript">{{page.inlinescript}}</script>
+<script class="inlinescript">{{page.inlinescript | safe }}</script>
 {% endblock %}
 {% block finalScript %}
     {% if page.showKudos %}

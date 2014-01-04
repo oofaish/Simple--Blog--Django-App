@@ -1,8 +1,10 @@
 ;(function ( $, window, document, undefined ) {
 	
 	// Update the page content.
-	var $title   = $( '.pageTitle' );
-	var $content = $( '.pageContent' );
+	var $title    	= $( '.pageTitle' );
+	var $content  	= $( '.pageContent' );
+	var spinner   	= null;
+	var spinTarget 	= document.getElementsByTagName('header')[ 0 ];
 	
     /**********************************************************
     ** Plugin
@@ -12,7 +14,7 @@
         var options = $.extend( {}, $.fn.jaxify.defaults, userOptions );
         
         element.click( function( e ){
-        	
+        	$.fn.jaxify.spin();
         	//ugly ugly hack to clear anything that may have been loaded
         	var maxId = setTimeout(function(){}, 0);
         	for(var i=0; i < maxId; i+=1) { 
@@ -23,9 +25,9 @@
             var url = this.attributes['href'].value;
             $.fn.jaxify.getPageData( url, false );        
             //hacky way to make sure the Hover disappears in the second level of navigations
-            var $respectHover = $('.respectHover'); 
+            var $respectHover = $('.no-touch .respectHover'); 
             $respectHover.removeClass('respectHover');
-            $respectHover.delay(1000).fadeIn(1, null, function(){ $( this ).addClass('respectHover') });
+            $respectHover.delay(500).fadeIn(500, null, function(){ $( this ).addClass('respectHover') });
             $("html, body").animate({ scrollTop: 0 }, "medium" ); 
         }).addClass('jaxified').removeClass('jaxify');   
     }
@@ -45,11 +47,50 @@
     $.fn.jaxify.defaults = {
         };
     
+    $.fn.jaxify.spin = function()
+    {
+    	if( spinner == null )
+    	{
+    		$.fn.jaxify.setupSpinner();
+    	}
+    	else
+    		spinner.spin( spinTarget )
+    },
+    
+    $.fn.jaxify.stopSpin = function()
+    {
+    	spinner.stop();
+    },
+    
+    $.fn.jaxify.setupSpinner = function()
+    {
+		var opts = {
+				  lines: 13, // The number of lines to draw
+				  length: 20, // The length of each line
+				  width: 10, // The line thickness
+				  radius: 30, // The radius of the inner circle
+				  corners: 1, // Corner roundness (0..1)
+				  rotate: 0, // The rotation offset
+				  direction: 1, // 1: clockwise, -1: counterclockwise
+				  color: '#E3B74F', // #rgb or #rrggbb or array of colors
+				  speed: 1, // Rounds per second
+				  trail: 60, // Afterglow percentage
+				  shadow: true, // Whether to render a shadow
+				  hwaccel: false, // Whether to use hardware acceleration
+				  className: 'spinner', // The CSS class to assign to the spinner
+				  zIndex: 2e9, // The z-index (defaults to 2000000000)
+				  top: 'auto', // Top position relative to parent in px
+				  left: 'auto' // Left position relative to parent in px
+				};
+
+		spinner = new Spinner(opts).spin( spinTarget );	
+    },
+
     $.fn.jaxify.jaxifyPage = function()
     {
         if (window.history && window.history.pushState)
         {
-            var $links   = $( '.jaxify' );
+            var $links = $( '.jaxify' );
                 
             // Attach click listeners for each of the nav links.
             $links.jaxify();
@@ -81,13 +122,24 @@
         });        
     };
 
+    $.fn.jaxify.evaluateInlineScript = function( script )
+    {
+    	if( script.length > 0 )
+    	{
+    		$( '.inlinescript' ).html('').html(script);
+    		eval( $( '.inlinescript' )[0].innerHTML );//ugly, but couldnt get it to work with append
+    	}
+    }
     
 	$.fn.jaxify.updateContent = function( stateObj ) {
 	    // Check to make sure that this state object is not null.
 	    if (stateObj) {
+	    	//$('.wideNav ul li > ul').css('display', 'none');
 	        document.title = stateObj.longTitle;
 	        $title.html( stateObj.title );
+	        $('meta[property="twitter:title"]').attr('content', stateObj.title );
 	        $content.html( stateObj.htmlContent );
+	        $('meta[property="og:url"]').attr('content', window.location.href )
 	        done = stateObj.scripts.length;
 	        $('.pageSpecificElement').remove();
 	        $('.shareWrapperWrapper').html('').append('<div class="shareWrapper"></div>');
@@ -96,10 +148,15 @@
 	        		done -= 1;
 	        		if( done == 0 )
 	        		{
-	        			$( '.inlinescript' ).html('').append(stateObj.inlinescript);
+	        			$.fn.jaxify.evaluateInlineScript( stateObj.inlinescript )
 	        		}
 	        	});
 	        });
+	        
+	        if( stateObj.scripts.length == 0 )
+	        {
+	        	$.fn.jaxify.evaluateInlineScript( stateObj.inlinescript )
+	        }
 	        
 	        $.each( stateObj.stylesheets, function( index, stylesheet ){
 	        	$('<link>').attr('rel','stylesheet')
@@ -125,6 +182,8 @@
 	            $('.kudo').fadeOut('fast');
 	            //setupKudos( stateObj.id.toString(), 0 );
 	        }
+	        
+	        $.fn.jaxify.stopSpin();
 	    }
 	};
 
@@ -165,17 +224,25 @@
 	                if( firstCall )
 	                    history.replaceState( data, data.longTitle, '' );
 	                else
+	                {
 	                    history.pushState(data, data.longTitle, url);
+	                    //short url:
+	                    var shortUrl = window.location.href;
+	                    shortUrl = shortUrl.replace(/^[^\/]*(?:\/[^\/]*){2}/, "" );
+	                    _gaq.push( [ '_trackPageview', shortUrl ] );
+	                }
+	                $('meta[property="og:url"]').attr('content', window.location.href )
 	                $.data($('.shareWrapper')[0], 'plugin_sharrre', null);
+	                
 	                $.fn.jaxify.share(window.location.href, data.longTitle );
 	            }
 	            else
 	            {                
 	                //try and go to the url page to force a 404
-	                window.location = url;
-	                //console.log( data );
-	            	//console.log( window.location.href );
-	                //showAlert( 'danger', data['error'] );
+	                //window.location = url;
+	                console.log( data );
+	            	console.log( window.location.href );
+	                showAlert( 'danger', data['error'] );
 	            } 
 	        }
 	    );

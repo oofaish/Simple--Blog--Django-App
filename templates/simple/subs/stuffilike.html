@@ -1,0 +1,8 @@
+{{pageContent | safe }}
+    <ul>
+    {% for thing in things %}
+        <li class="ThingLI"><a href="{{thing.link}}"><strong>{{thing.title}}</strong></a>
+        <p class="smallItalicText">{{thing.description}}</p>
+        </li>
+    {% endfor %}
+    </ul>
